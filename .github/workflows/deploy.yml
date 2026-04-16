@@ -19,6 +19,7 @@ jobs:
       - name: Install Anchor
         run: |
           cargo install --git https://github.com/coral-xyz/anchor --tag v0.30.1 anchor-cli --locked
+          cargo install cargo-build-sbf
 
       - name: Build
         run: anchor build
