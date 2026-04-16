@@ -21,7 +21,7 @@ jobs:
 
       - name: Setup keypair
         run: |
-          echo '${{ secrets.DEVNET_KEY PAIR }}' > keypair.json
+          echo '${{ secrets.DEVNET_KEYPAIR }}' > keypair.json
 
       - name: Deploy
         run: anchor deploy --provider.cluster devnet --keypair keypair.json
