@@ -1,4 +1,5 @@
 use anchor_lang::prelude::*;
+use anchor_lang::system_program;
 
 declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 
@@ -120,7 +121,7 @@ pub mod compute_power {
 
         // 验证验证节点必须是平台授权的验证器
         require!(
-            platform_account.authority == ctx.accounts.validator.key(),
+            platform_account.authority == ctx.accounts.user.key(),
             ErrorCode::UnauthorizedValidator
         );
 
@@ -337,9 +338,9 @@ pub struct RegisterProvider<'info> {
 pub struct SubmitComputeWork<'info> {
     #[account(
         mut,
-        seeds = [b"user", provider.key().as_ref()],
+        seeds = [b"user", user.key().as_ref()],
         bump = provider_account.bump,
-        constraint = provider_account.owner == provider.key() @ ErrorCode::Unauthorized
+        constraint = provider_account.owner == user.key() @ ErrorCode::Unauthorized
     )]
     pub provider_account: Account<'info, UserAccount>,
 
@@ -351,10 +352,7 @@ pub struct SubmitComputeWork<'info> {
     pub platform_account: Account<'info, PlatformAccount>,
 
     /// 验证节点或授权账户
-    pub validator: Signer<'info>,
-
-    /// CHECK: 算力提供者地址，通过 constraint 验证
-    pub provider: AccountInfo<'info>,
+    pub user: Signer<'info>,
 }
 
 #[derive(Accounts)]
