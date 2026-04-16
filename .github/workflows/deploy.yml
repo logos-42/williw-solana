@@ -22,8 +22,12 @@ jobs:
       - name: Build
         run: anchor build
 
-      - name: Deploy
+      - name: Setup keypair
         run: |
-          anchor deploy --provider.cluster devnet --keypair ${{ secrets.DEVNET_KEYPAIR }}
+          echo '${{ secrets.DEVNET_KEYPAIR }}' > keypair.json
+          solana-keygen pubkey keypair.json
+
+      - name: Deploy
+        run: anchor deploy --provider.cluster devnet --keypair keypair.json
         env:
           ANCHOR_PROVIDER_URL: https://api.devnet.solana.com
