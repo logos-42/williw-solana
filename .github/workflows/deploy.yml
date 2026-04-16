@@ -16,6 +16,11 @@ jobs:
           sh -c "$(curl -sSfL "https://release.anza.xyz/v1.18.26")"
           echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
 
+      - name: Install Anchor CLI
+        run: |
+          sh -c "$(curl -sSfL "https://release.anza.xyz/anchor")"
+          echo "$HOME/.local/share/anchor/install/active_release/bin" >> $GITHUB_PATH
+
       - name: Build with cloud
         run: anchor build --provider.cluster devnet
 
