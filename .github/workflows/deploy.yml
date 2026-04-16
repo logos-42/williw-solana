@@ -13,8 +13,14 @@ jobs:
 
       - name: Install Solana CLI
         run: |
-          sh -c "$(curl -sSfL "https://release.anza.xyz/stable/install")"
+          sh -c "$(curl -sSfL "https://release.anza.xyz/v1.18.26/install")"
           echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+          solana --version
+
+      - name: Install Rust 1.75.0
+        run: |
+          rustup install 1.75.0
+          rustup default 1.75.0
 
       - name: Install AVM and Anchor CLI
         run: |
