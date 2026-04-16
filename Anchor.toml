@@ -1,14 +1,17 @@
+anchor_version = "1.0.0"
+
 [toolchain]
+anchor = "1.0.0"
 
 [features]
 resolution = true
 skip-lint = false
 
-[programs.localnet]
-compute_power = "65YrQAS7S35xGxTXGFtSVHeEX4k26nGUAHPWGqnk6UmW"
+[programs.testnet]
+compute_power = "J7ieHDE4HBAZEyeXK2mfvJ6UdWM5dKaWqxUzBW1PgyAe"
 
 [provider]
-cluster = "localnet"
+cluster = "testnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]

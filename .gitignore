@@ -24,6 +24,6 @@ Thumbs.db
 *.swp
 *.swo
 *~
-
+*.env
 # Solana
 test-ledger/
