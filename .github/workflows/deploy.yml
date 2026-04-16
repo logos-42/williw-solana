@@ -2,7 +2,7 @@ name: Deploy to Devnet
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 jobs:
@@ -11,9 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: dtolnay/rust-action@stable
-        with:
-          version: "1.75.0"
+      - name: Install Rust 1.75
+        run: |
+          rustup install 1.75.0
+          rustup default 1.75.0
 
       - name: Install Anchor
         run: |
@@ -25,7 +26,6 @@ jobs:
       - name: Setup keypair
         run: |
           echo '${{ secrets.DEVNET_KEYPAIR }}' > keypair.json
-          solana-keygen pubkey keypair.json
 
       - name: Deploy
         run: anchor deploy --provider.cluster devnet --keypair keypair.json
