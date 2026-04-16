@@ -11,25 +11,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Solana CLI
+      - name: Install Rust stable
         run: |
-          sh -c "$(curl -sSfL "https://release.anza.xyz/v1.18.26/install")"
-          echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
-          solana --version
+          rustup update stable
+          rustup default stable
 
-      - name: Install Rust 1.75.0
-        run: |
-          rustup install 1.75.0
-          rustup default 1.75.0
-
-      - name: Install AVM and Anchor CLI
+      - name: Install AVM and Anchor CLI 1.0.0
         run: |
           cargo install --git https://github.com/coral-xyz/anchor avm --force
-          avm install 0.30.1
-          avm use 0.30.1
-          echo "$HOME/.avm/versions/0.30.1/bin" >> $GITHUB_PATH
+          avm install 1.0.0
+          avm use 1.0.0
+          echo "$HOME/.avm/bin" >> $GITHUB_PATH
 
-      - name: Build with cloud
+      - name: Build
         run: anchor build --provider.cluster devnet
 
       - name: Setup keypair

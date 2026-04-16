@@ -1,5 +1,4 @@
 use anchor_lang::prelude::*;
-use anchor_lang::system_program;
 
 declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 
@@ -55,7 +54,7 @@ pub mod compute_power {
 
         // 转账支付 - 先转账再更新状态，防止重入攻击
         let cpi_context = CpiContext::new(
-            ctx.accounts.system_program.to_account_info(),
+            anchor_lang::system_program::ID,
             anchor_lang::system_program::Transfer {
                 from: ctx.accounts.user.to_account_info(),
                 to: platform_account.to_account_info(),
@@ -200,7 +199,7 @@ pub mod compute_power {
 
         // 使用 system_program 转账，更安全规范
         let transfer_context = CpiContext::new(
-            ctx.accounts.system_program.to_account_info(),
+            anchor_lang::system_program::ID,
             anchor_lang::system_program::Transfer {
                 from: platform_account.to_account_info(),
                 to: ctx.accounts.user.to_account_info(),
