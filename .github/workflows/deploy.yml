@@ -11,18 +11,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-rust@v4
+      - uses: dtolnay/rust-action@stable
         with:
-          rust-version: "1.75.0"
+          version: "1.75.0"
 
-      - uses: solana-protocol/anchor@master
-        with:
-          anchor-version: 0.30.1
-          solana-version: "1.18.26"
+      - name: Install Anchor
+        run: |
+          cargo install --git https://github.com/coral-xyz/anchor --tag v0.30.1 anchor-cli --locked
 
-      - run: anchor build
+      - name: Build
+        run: anchor build
 
-      - run: |
+      - name: Deploy
+        run: |
           anchor deploy --provider.cluster devnet --keypair ${{ secrets.DEVNET_KEYPAIR }}
         env:
           ANCHOR_PROVIDER_URL: https://api.devnet.solana.com
