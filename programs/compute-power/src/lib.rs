@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("J7ieHDE4HBAZEyeXK2mfvJ6UdWM5dKaWqxUzBW1PgyAe");
+declare_id!("7ng11Nyy312EbcsKmEnugTfBnkCLpiqxVLMCwBSUVK3a");
 
 // 常量定义
 const MIN_WITHDRAW_AMOUNT: u64 = 1_000_000; // 0.001 SOL 最小提现金额

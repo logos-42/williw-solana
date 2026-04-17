@@ -7,11 +7,11 @@ anchor = "1.0.0"
 resolution = true
 skip-lint = false
 
-[programs.testnet]
-compute_power = "J7ieHDE4HBAZEyeXK2mfvJ6UdWM5dKaWqxUzBW1PgyAe"
+[programs.devnet]
+compute_power = "7ng11Nyy312EbcsKmEnugTfBnkCLpiqxVLMCwBSUVK3a"
 
 [provider]
-cluster = "testnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
